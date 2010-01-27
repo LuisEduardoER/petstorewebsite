@@ -1,0 +1,91 @@
+--    1 What is the ratio of business to home customers?
+-- get the business sale and home customer sale
+
+SELECT customer_dim.customertype, SUM(clist.salebycustomer) AS salebycategory FROM
+(SELECT fs.customerid,SUM(fs.sale) AS salebycustomer FROM factsale fs GROUP BY fs.customerid) AS clist,customer_dim
+WHERE clist.customerid = customer_dim.customerid GROUP BY customer_dim.customertype ORDER BY salebycategory DESC;
+
+-- compute the ratio by divide;
+
+--    2 What stores are increasing in sales?
+-- get sales by store at two time window
+SELECT time1.storeid, (time2.sale-time1.sale) AS saleincrease FROM 
+(SELECT fs.storeid, SUM(fs.sale) AS salebystore FROM factsale fs WHERE timeid = 1 GROUP BY fs.storeid) AS time1,
+(SELECT fs.storeid, SUM(fs.sale) AS salebystore FROM factsale fs WHERE timeid = 2 GROUP BY fs.storeid) AS time2
+WHERE time1.storeid = time2.storeid AND time1.salebystore > time2.salebystore ORDER BY saleincrease DESC;
+ 
+--    3 Maintain every day the aggregate sales and profit of the top 5 and the bottom 5 products.
+-- use factsale table
+SELECT fs.productid, SUM(fs.sale) AS totalSale FROM factsale fs WHERE fs.timeid = 'today' GROUP BY fs.productid ORDER BY totalSale DESC;
+-- bottom 5
+SELECT fs.productid, SUM(fs.sale) AS totalSale FROM factsale fs WHERE fs.timeid = 'today' GROUP BY fs.productid ORDER BY totalSale ASC;
+
+--    4 Maintain every day the top 2 customer categories (highest sales) and the top product categories.
+-- customer category
+SELECT customer_dim.category, SUM(clist.totalSale) AS salebycategory FROM
+(SELECT fs.customerid, SUM(fs.sale) AS totalSale FROM factsale fs WHERE fs.timeid = 'today' GROUP BY fs.customerid) AS clist, customer_dim
+WHERE clist.customerid = customer_dim.customerid
+GROUP BY category 
+ORDER salebycategory DESC;
+
+-- product category
+SELECT pd.category, SUM(salebyproduct.sale) AS salebycategory FROM
+(SELECT fs.productid, SUM(fs.sale) AS totalSale FROM factsale fs WHERE fs.timeid = 'today' GROUP BY fs.productid ORDER BY totalSale DESC) AS salebyproduct,productdim 
+WHERE pd.productid = salebyproduct.productid 
+GROUP BY category 
+ORDER BY salebycategory DESC;
+
+--    5 How do the various regions compare by sales volume?
+SELECT store_dim.regionid, SUM(slist.salebystore) AS salebyregion FROM
+(SELECT fs.storeid,SUM(fs.sale) AS salebystore FROM factsale fs GROUP BY fs.storeid) AS slist,store_dim
+WHERE slist.storeid = store_dim.storeid
+GROUP BY regionid
+ORDER BY salebyregion DESC;
+--    6 Which  businesses are buying given products the most?
+-- get the customerid who buy certain product
+SELECT fs.customerid,SUM(fs.sale) FROM factsale fs WHERE productid = 'pid' GROUP BY customerid ORDER BY sale DESC;
+
+--    7 What is the demand curve for each product category (i.e., the curve, that measures the propensity of customer to pay for a product as the price changes)?
+
+--    8 Develop a direct marketing  data; for each product, a list of customers that buy the product more than 2 times per week.
+SELECT customerid FROM (SELECT fs.customerid, COUNT(*)AS buytime FROM factsale fs WHERE fs.productid = 'pid' GROUP BY fs.customerid) WHERE buytime > 2;
+--    9 Other interesting aggregate values that you will come up with.
+-- 
+
+
+-- TODO: write loading routine
+-- customer_dim
+-- insert customer id and type
+INSERT INTO customer_dim(customerid,category,customertype)
+SELECT cus.customerid,cus.ctype FROM customer cus;
+
+-- update customer category
+UPDATE customer_dim SET category = 'home' WHERE customertype = '0' -- 0 represent home customer
+UPDATE customer_dim cd SET cd.category = 
+SELECT bc.category FROM busicustomer bc WHERE customer_dim.customerid = bc.customerid;
+
+-- store dim
+INSERT INTO store_dim(storeid, regionid)
+SELECT sto.sid,sto.regionid FROM stores sto;
+
+-- product dim
+INSERT INTO productdim(productid,category, price)
+SELECT ps.pid,ps.category,ps.uniprice FROM products ps;
+
+-- timedim
+-- system generated
+
+-- factsale
+INSERT INTO factsale (customerid,productid,storeid,timeid,sale)
+SELECT o.cid,od.pid,o.sid,td.timeid,o.total FROM orders o, orderdetail od
+WHERE o.oid = od.oid AND o.odate = 
+-- get time id
+SELECT td.timeid FROM time_dim td WHERE td.date = o.odate;
+
+-- insert or update?
+-- if one customer will buy same product more then once(in two order) at the same store at the same day
+-- then should use update
+
+
+ 
+ 
