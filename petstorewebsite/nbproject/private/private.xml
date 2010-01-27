@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/C:/Users/Jeff/Documents/NetBeansProjects/jzhao/web/decisionsupport.jsp</file>
+        <file>file:/C:/Users/Jeff/Documents/NetBeansProjects/jzhao/src/java/admin/loadingroutineadmin.java</file>
+        <file>file:/C:/Users/Jeff/Documents/NetBeansProjects/jzhao/web/loadingroutine.jsp</file>
+        <file>file:/C:/Users/Jeff/Documents/NetBeansProjects/jzhao/src/java/entity/Transcation.java</file>
+        <file>file:/C:/Users/Jeff/Documents/NetBeansProjects/jzhao/src/java/admin/inventoryadmin.java</file>
+        <file>file:/C:/Users/Jeff/Documents/NetBeansProjects/jzhao/src/java/entity/Product.java</file>
+        <file>file:/C:/Users/Jeff/Documents/NetBeansProjects/jzhao/src/java/database/dbConnection.java</file>
+        <file>file:/C:/Users/Jeff/Documents/NetBeansProjects/jzhao/src/java/admin/storeadmin.java</file>
+        <file>file:/C:/Users/Jeff/Documents/NetBeansProjects/jzhao/src/java/entity/Store.java</file>
+        <file>file:/C:/Users/Jeff/Documents/NetBeansProjects/jzhao/src/java/admin/employeeadmin.java</file>
+        <file>file:/C:/Users/Jeff/Documents/NetBeansProjects/jzhao/src/java/entity/Employee.java</file>
+        <file>file:/C:/Users/Jeff/Documents/NetBeansProjects/jzhao/web/employeemanager.jsp</file>
+        <file>file:/C:/Users/Jeff/Documents/NetBeansProjects/jzhao/web/productmanager.jsp</file>
+        <file>file:/C:/Users/Jeff/Documents/NetBeansProjects/jzhao/src/java/admin/productadmin.java</file>
+        <file>file:/C:/Users/Jeff/Documents/NetBeansProjects/jzhao/src/java/entity/Customer.java</file>
+        <file>file:/C:/Users/Jeff/Documents/NetBeansProjects/jzhao/web/customermanager.jsp</file>
+        <file>file:/C:/Users/Jeff/Documents/NetBeansProjects/jzhao/src/java/admin/customeradmin.java</file>
+        <file>file:/C:/Users/Jeff/Documents/NetBeansProjects/jzhao/web/index.jsp</file>
+        <file>file:/C:/Users/Jeff/Documents/NetBeansProjects/jzhao/web/inventorymanager.jsp</file>
+        <file>file:/C:/Users/Jeff/Documents/NetBeansProjects/jzhao/web/regionmanager.jsp</file>
+        <file>file:/C:/Users/Jeff/Documents/NetBeansProjects/jzhao/web/storemanager.jsp</file>
+        <file>file:/C:/Users/Jeff/Documents/NetBeansProjects/jzhao/web/transcationmanager.jsp</file>
+        <file>file:/C:/Users/Jeff/Documents/NetBeansProjects/jzhao/src/java/admin/decsupadmin.java</file>
+    </open-files>
+</project-private>
